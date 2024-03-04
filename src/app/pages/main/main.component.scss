@@ -1,0 +1,74 @@
+// Estilos para el contenedor principal
+.main__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+// Estilos para el grupo principal
+.main__group {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+// Estilos para el contenido principal
+.main__content {
+  background-color: rgba($color: #087990, $alpha: 0.1);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Estilos para el texto principal
+.main__text {
+  font-size: 48px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba($color: #087990, $alpha: 0.5);
+  color: rgba($color: #087990, $alpha: 0.4);
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #087990;
+  z-index: 500;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 16px 24px;
+}
+
+// Estilos para el icono principal
+.main__icon {
+  position: absolute;
+  height: 24rem;
+  transform: rotate(20deg);
+  user-select: none;
+  filter: drop-shadow(0 0 10px #087990);
+  animation: infiniteMotion 5s ease-in-out infinite;
+}
+
+// Animación de movimiento infinito
+@keyframes infiniteMotion {
+  0% {
+    transform: rotate(15deg);
+  }
+  83% {
+    transform: rotate(15deg);
+  }
+  88% {
+    transform: rotate(30deg);
+  }
+  93% {
+    transform: rotate(0deg);
+  }
+  98% {
+    transform: rotate(18deg);
+  }
+  100% {
+    transform: rotate(15deg);
+  }
+}

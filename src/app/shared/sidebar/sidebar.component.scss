@@ -1,0 +1,267 @@
+// Definición de variables de color y transición
+$hovered-background: rgba(
+  255,
+  255,
+  255,
+  0.2
+); // Color de fondo al pasar el mouse
+$active-background: rgba(255, 255, 255, 0.1); // Color de fondo al hacer clic
+$color-background: #087990; // Color de fondo principal
+$transition: all 0.5s ease-out; // Transición para efectos de animación
+
+// Estilos de la barra lateral
+.sidebar {
+  position: relative;
+  background-color: #087990;
+  height: 100%;
+  transition: $transition;
+  display: flex;
+  flex-direction: column;
+}
+
+// Estilos del encabezado de la barra lateral
+.sidebar__header {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  color: #fff;
+
+  // Estilos del contenido del encabezado
+  .header__content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  // Estilos de la información del usuario
+  .header__user-info {
+    width: 100%;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+// Estilos del contenido de la barra lateral
+.sidebar__content {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+
+  // Estilos del menú de la barra lateral
+  .sidebar__menu {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    // Estilos de los elementos del menú
+    .menu__item {
+      position: relative;
+      width: 100%;
+      transition: all 0.15s ease-in-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      color: #fff;
+      cursor: pointer;
+      border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+
+      // Estilos al pasar el mouse sobre los elementos del menú
+      &:hover {
+        background-color: $hovered-background;
+      }
+
+      // Estilos al hacer clic en los elementos del menú
+      &:active {
+        background-color: $active-background;
+      }
+
+      // Estilos del icono del menú
+      .item__icon {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        transition: $transition;
+      }
+    }
+  }
+}
+
+// Estilos del pie de la barra lateral
+.sidebar__footer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-self: flex-end;
+  border-top: solid 1px rgba($color: #ffffff, $alpha: 0.2);
+
+  // Estilos de los controles de la barra lateral
+  .menu__controls {
+    position: relative;
+    width: 100%;
+    display: flex;
+    padding: 2px;
+    transition: $transition;
+
+    // Estilos de los elementos de control
+    .control__item {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: $transition;
+      border-radius: 4px;
+      user-select: none;
+      padding: 8px;
+      cursor: pointer;
+
+      // Estilos al pasar el mouse sobre los elementos de control
+      &:hover {
+        background-color: $hovered-background;
+      }
+
+      // Estilos al hacer clic en los elementos de control
+      &:active {
+        background-color: $active-background;
+      }
+    }
+  }
+}
+
+// Estilos responsivos de la barra lateral
+.sidebar--collapsed {
+  width: 64px;
+}
+.sidebar--expanded {
+  width: 260px;
+}
+
+// Estilos para ocultar y mostrar contenido
+.content--hidden {
+  width: 0%;
+  overflow: hidden;
+  opacity: 0;
+  transition: $transition;
+}
+.content--show {
+  width: 100%;
+  overflow: hidden;
+  transition: $transition;
+}
+
+// Estilos adicionales para elementos específicos
+.menu__item--collapsed {
+  height: 64px;
+}
+.menu__item--expanded {
+  height: 44px;
+}
+
+.item__icon--collapsed {
+  width: 100%;
+}
+
+.item__icon--expanded {
+  width: 64px;
+}
+
+.menu__controls--collapsed {
+  flex-direction: column;
+}
+.menu__controls--expanded {
+  flex-direction: row;
+}
+
+// Estilos para textos e iconos específicos
+.text--username {
+  font-weight: bold;
+}
+.text--menu {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.icon--menu {
+  height: 32px;
+}
+.icon--user {
+  position: relative;
+  height: 48px;
+}
+.icon--control {
+  position: relative;
+  height: 32px;
+}
+
+.emoji {
+  position: absolute;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: transform 0.3s ease;
+}
+.emoji--move-up {
+  top: 0;
+  opacity: 1;
+  transform: translateY(-50px);
+}
+.emoji--move-left {
+  left: 0;
+  opacity: 1;
+  transform: translateX(-50px);
+}
+
+// Estilos del boton para expandir y contraer la barra lateral
+.btn__sidebar {
+  position: absolute;
+  background-color: rgba($color: $color-background, $alpha: 1);
+  border-radius: 16px;
+  border: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+  transition: $transition;
+
+  img {
+    height: 24px;
+  }
+
+  // Estilos al pasar el mouse sobre el botón
+  &:hover {
+    background-color: #2a8395;
+  }
+}
+
+// Estilos del boton para expandir y contrae la barra lateral en diferentes estados
+.btn__sidebar--open {
+  left: -36px;
+
+  img {
+    transition: $transition;
+    transform: rotate(0deg);
+  }
+}
+.btn__sidebar--close {
+  left: -16px;
+
+  img {
+    transition: $transition;
+    transform: rotate(180deg);
+  }
+}

@@ -1,0 +1,144 @@
+<!-- Div que representa la barra lateral -->
+<div
+  class="sidebar"
+  [ngClass]="{
+    'sidebar--collapsed': sidebarCollapsed,
+    'sidebar--expanded': !sidebarCollapsed
+  }"
+>
+  <!-- Encabezado de la barra lateral -->
+  <div class="sidebar__header">
+    <!-- Botón para colapsar y expandir la barra lateral -->
+    <button
+      class="btn__sidebar"
+      [ngClass]="{
+        'btn__sidebar--open': sidebarCollapsed,
+        'btn__sidebar--close': !sidebarCollapsed
+      }"
+      (click)="sidebarCollapsed = !sidebarCollapsed"
+    >
+      <!-- Ícono del menú -->
+      <img [src]="iconUrl + sidebarIcons.menu" alt="icon-menu" />
+    </button>
+    <!-- Contenido del encabezado (nombre de usuario y avatar) -->
+    <div
+      class="header__content"
+      [title]="sidebarCollapsed ? userData.username : ''"
+    >
+      <!-- Nombre de usuario -->
+      <div
+        class="header__user-info"
+        [ngClass]="{
+          'content--hidden': sidebarCollapsed,
+          'content--show': !sidebarCollapsed
+        }"
+      >
+        <span class="text--username">{{ userData.username }}</span>
+      </div>
+      <!-- Avatar del usuario -->
+      <img
+        class="icon--user"
+        [src]="userData.avatar ? userData.avatar : iconUrl + sidebarIcons.user"
+        alt="icon-user"
+      />
+    </div>
+  </div>
+
+  <!-- Contenido de la barra lateral -->
+  <div class="sidebar__content">
+    <!-- Menú de la barra lateral -->
+    <ul class="sidebar__menu">
+      <!-- Elementos del menú -->
+      <li
+        class="menu__item"
+        [ngClass]="{
+          'menu__item--collapsed': sidebarCollapsed,
+          'menu__item--expanded': !sidebarCollapsed
+        }"
+        *ngFor="let item of menuItems; let i = index"
+        [title]="sidebarCollapsed ? item.title : ''"
+        (mouseover)="changeIcon('', i, true)"
+        (mouseout)="changeIcon('', i, false)"
+        (click)="
+          changeMainContent({ title: item.title, icon: item.iconHovered })
+        "
+      >
+        <!-- Icono del elemento del menú -->
+        <div
+          class="item__icon"
+          [ngClass]="{
+            'item__icon--collapsed': sidebarCollapsed,
+            'item__icon--expanded': !sidebarCollapsed
+          }"
+        >
+          <img
+            class="icon--menu"
+            [src]="
+              !item.isHovered ? iconUrl + item.icon : iconUrl + item.iconHovered
+            "
+            alt="icon-menu"
+          />
+        </div>
+        <!-- Texto del elemento del menú -->
+        <span
+          class="text--menu"
+          [ngClass]="{
+            'content--hidden': sidebarCollapsed,
+            'content--show': !sidebarCollapsed
+          }"
+          >{{ item.title }}</span
+        >
+      </li>
+    </ul>
+  </div>
+
+  <!-- Pie de página de la barra lateral -->
+  <div class="sidebar__footer">
+    <!-- Controles de la barra lateral -->
+    <ul
+      class="menu__controls"
+      [ngClass]="{
+        'menu__controls--expanded': !sidebarCollapsed,
+        'menu__controls--collapsed': sidebarCollapsed
+      }"
+    >
+      <!-- Elementos de control -->
+      <li
+        class="control__item"
+        *ngFor="let control of controlItems; let i = index"
+        [title]="control.title"
+        (mouseover)="changeIcon('control', i, true)"
+        (mouseout)="changeIcon('control', i, false)"
+        (click)="
+          controlItems.length - 1 !== i
+            ? changeMainContent({
+                title: control.title,
+                icon: control.iconHovered
+              })
+            : logout()
+        "
+      >
+        <!-- Icono del elemento de control -->
+        <img
+          class="icon--control"
+          [src]="
+            !control.isHovered
+              ? iconUrl + control.icon
+              : iconUrl + control.iconHovered
+          "
+          alt="icon-control"
+        />
+        <!-- Emoji de confirmación para cerrar sesión -->
+        <span
+          *ngIf="control.title === 'Cerrar sesión'"
+          class="emoji"
+          [ngClass]="{
+            'emoji--move-up': logoutClicked && !sidebarCollapsed,
+            'emoji--move-left': logoutClicked && sidebarCollapsed
+          }"
+          >🫡</span
+        >
+      </li>
+    </ul>
+  </div>
+</div>

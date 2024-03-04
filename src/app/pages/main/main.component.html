@@ -1,0 +1,27 @@
+<!-- Contenedor principal de la página -->
+<div class="main__container">
+  <!-- Grupo de elementos principales -->
+  <div class="main__group">
+    <!-- Barra de navegación -->
+    <app-navbar class="navbar__content"></app-navbar>
+    <!-- Contenido principal -->
+    <div class="main__content">
+      <!-- Icono del contenido principal -->
+      <img
+        class="main__icon"
+        [src]="
+          contentData.icon
+            ? iconUrl + contentData.icon
+            : iconUrl + 'family_star.svg'
+        "
+        alt="icon"
+      />
+      <!-- Título del contenido principal -->
+      <h1 class="main__text">
+        {{ contentData.title ? contentData.title : "Contenido principal" }}
+      </h1>
+    </div>
+  </div>
+  <!-- Barra lateral -->
+  <app-sidebar class="sidebar__content"></app-sidebar>
+</div>
